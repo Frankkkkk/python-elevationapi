@@ -17,5 +17,7 @@ elevations = e.getElevations((46.2, 6.15), (6.3, 6.20))
 
 ## Using another API provider
 Simply instance Elevation with:
-`e = Elevation(base_url='http://your-server.tld/api')`
+````python
+e = Elevation(base_url='http://your-server.tld/api')
+````
 
