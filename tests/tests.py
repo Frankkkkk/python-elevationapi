@@ -4,7 +4,7 @@
 
 import unittest, sys
 import random
-from Elevation import Elevation
+from elevationapi import Elevation
 
 class CustomAssertions: #{{{
 	def assertElevsNear(self, ret, eles):
@@ -38,38 +38,6 @@ class TestElevation(unittest.TestCase, CustomAssertions):
 		self.assertElevsNear(e.getElevation(pt), 375)
 
 
-	def testPointJson(self):
-		e = Elevation(base_url=localhost)
-		pjson = {
-			'lat': 46.41,
-			'lon': 6.84
-		}
-
-		#given a dict, expect a dict
-		self.assertEqual(type(e.getElevation(pjson)), dict)
-
-		#correct value
-		self.assertElevsNear(e.getElevation(pjson)['ele'], 375)
-
-
-	def testPointSame(self, lat=46.41, lon=6.84):
-		e = Elevation(base_url=localhost)
-		pt = (lat, lon)
-		pjson = {
-			'lat': lat,
-			'lon': lon
-		}
-
-		#Both interfaces return the same value
-		self.assertEqual(e.getElevation(pt), e.getElevation(pjson)['ele'])
-
-	def testPointSameRandom(self):
-		for i in range(100):
-			lat = 46+random.random()
-			lon = 6+random.random()
-			self.testPointSame(lat=lat, lon=lon)
-
-
 	def testListTuple(self):
 		e = Elevation(base_url=localhost)
 		pts = [(46.1, 6.1), (47.2, 6.1), (46.46, 6.47)]
@@ -85,26 +53,6 @@ class TestElevation(unittest.TestCase, CustomAssertions):
 
 		#Of good values
 		self.assertElevsNear(rets, eles)
-
-	def testListJson(self):
-		e = Elevation(base_url=localhost)
-		pts = [(46.1, 6.1), (47.2, 6.1), (46.46, 6.47)]
-		ptsJson = [{'lat': e[0], 'lon': e[1]} for e in pts]
-		eles = [643, 414, 370]
-
-		ret = e.getElevations(ptsJson)
-
-		#Returns a list
-		self.assertEqual(type(ret), list)
-
-		for ir in range(len(ret)):
-			r = ret[ir]
-			#given a dict, expect a dict
-			self.assertEqual(type(r), dict)
-
-			ele = r['ele']
-			#correct value
-			self.assertElevsNear(ele, eles[ir])
 
 
 

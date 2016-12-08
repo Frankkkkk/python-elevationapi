@@ -16,26 +16,12 @@ class Elevation():
 		then a scalar is returned. If point is a {'lat':…,'lon':…} dict, then
 		a {'lat':…,'lon':…,'ele':…} dict is returned
 		'''
-		if type(point) == tuple:
-			return self._getElevationTuple(point)
-		if type(point) == dict:
-			return self._getElevationDict(point)
 
-	def _getElevationTuple(self, point):
 		assert(type(point) == tuple)
 		assert(len(point) == 2)
 		base = 'point/{}/{}?format=short'.format(round(point[0], 3), round(point[1], 3))
 
 		return self._get_json(base)
-
-	def _getElevationDict(self, point):
-		assert(type(point) == dict)
-		assert('lat' in point)
-		assert('lon' in point)
-		base = 'point'
-
-		return self._get_json(base, {'point': json.dumps(point)})
-
 
 	def getElevations(self, points):
 		'''Returns the elevation of a list of points. If the elements of the
