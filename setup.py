@@ -1,11 +1,6 @@
 from distutils.core import setup
 
-try:
-	import pypandoc
-	long_description = pypandoc.convert('README.md', 'rst')
-except(IOError, ImportError) as e:
-	print(e)
-	long_description = open('README.md').read()
+long_description = open('README.rst').read()
 
 setup(
 	name = 'elevationapi',
