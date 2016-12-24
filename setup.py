@@ -1,13 +1,12 @@
-from distutils.core import setup
-
-long_description = open('README.rst').read()
+from setuptools import setup, find_packages
 
 setup(
 	name = 'elevationapi',
 	packages = ['elevationapi'],
-	version = '1.0.0',
+	version = '1.0.3',
 	description = 'Get the elevation of any land point on Earth using elevationapi.xyz',
-	long_description=long_description,
+	long_description=open("README.rst", "r").read(),
+	include_package_data=True,
 	author = 'Frank Villaro-Dixon',
 	author_email = 'frank@villaro-dixon.eu',
 	url = 'https://github.com/Frankkkkk/python-elevationapi',
